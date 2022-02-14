@@ -8,17 +8,17 @@ public class Merging {
         int[] array1 = {1, -6, 3, -6, -2};
         int[] array2 = {-6, -2, 10, 2, 3, -4, 5, 6, 7, -9};
 
-        mergeSort(array2);
+        array2=mergeSort(array2);
        System.out.println(Arrays.toString(array2));
-       mergeSort(array1);
-       System.out.println(Arrays.toString(array1));
+       //mergeSort(array1);
+       //System.out.println(Arrays.toString(array1));
 
 
     }
 
-    public static void mergeSort(int[] array) {
+    public static int[] mergeSort(int[] array) {
         if (array.length < 2) {
-            return ;
+            return array;
         }
         int mid = array.length / 2;//нашли середину массива
 //разделили на две части
@@ -33,15 +33,17 @@ public class Merging {
             rightArray[i-mid]=array[i];
         }//правая часть
 //рекурсией делим пока не останется 1 элемент
-        mergeSort(leftArray);
-         mergeSort(rightArray);
+        leftArray=mergeSort(leftArray);
+         rightArray=mergeSort(rightArray);
 
-        merge(leftArray,rightArray);//обьединяем
+        return merge(leftArray,rightArray);//обьединяем
 
     }
-    public static void merge(int[]leftArray, int[]rightArray){
+    public static int[] merge(int[]leftArray, int[]rightArray){
+        
 
-        int[]newSortedArray = new int[leftArray.length+ rightArray.length];
+        int[]newSortedArray = new int[leftArray.length+ rightArray.length]; // this is new result array it should be returned
+                                                                            
         int leftLength = leftArray.length;
         int rightLength = rightArray.length;
         int l=0,r=0,i=0;//run in arrays(l run in left, r run in right,i run in newSorted)
@@ -65,6 +67,6 @@ public class Merging {
             r++;
             i++;
         }
-
+        return newSortedArray;
     }
 }
